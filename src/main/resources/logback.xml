@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="60 seconds" packagingData="true">
+
+    <!-- ******************** appender：日志目的地 end ******************** -->
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- ******************** appender：日志目的地 end ******************** -->
+
+    <!-- ******************** logger：精确配置package或class的level、appender,可以配置0个或多个 end ******************** -->
+    <!--
+    level:日志级别（logger中的level会覆盖root中的，即以logger中为准，不管是否向上传递）
+    name:包名 或 类的全路径
+    addtivity:日志信息是否向上（root）传递
+    -->
+    <logger name="org.szpinc.study.shiro.spring.controller" level="debug" additivity="false">
+        <appender-ref ref="console"></appender-ref>
+    </logger>
+
+
+
+    <!--<root level="debug">-->
+        <!--&lt;!&ndash; 定义了INFO及以上级别的日志，分别在文件和控制台输出 &ndash;&gt;-->
+        <!--<level value="debug" />-->
+        <!--&lt;!&ndash;<appender-ref ref="file" />&ndash;&gt;-->
+        <!--<appender-ref ref="console" />-->
+    <!--</root>-->
+
+
+</configuration>

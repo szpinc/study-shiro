@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="cacheManager" ref="ehCacheManager"></property>
+        <property name="realm" ref="shiroRealm"></property>
+    </bean>
+    <!-- 配置缓存管理器 -->
+    <bean id="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:cache/ehcache.xml"></property>
+    </bean>
+
+    <bean id="shiroRealm" class="org.szpinc.study.shiro.spring.realm.ShiroRealm"></bean>
+
+    <!-- 配置LifecycleBeanPostProcessor.可以自定义的来调用配置在Spring IOC容器中 Shiro Bean 的生命周期的方法 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+
+
+    <!-- 启用IOC容器中使用shiro的注解，但必须在配置了LifecycleBeanPostProcessor之后调用 -->
+    <bean id="advisorAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+
+    <!--
+     配置Shiro Filter
+        id必须和web.xml中配置的
+     -->
+    <bean class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" id="shiroFilter">
+        <property name="securityManager" ref="securityManager"></property>
+        <property name="loginUrl" value="/login.html"></property>
+        <property name="successUrl" value="/index.html"></property>
+        <property name="unauthorizedUrl" value="/unauthorized.html"></property>
+    </bean>
+
+
+</beans>
