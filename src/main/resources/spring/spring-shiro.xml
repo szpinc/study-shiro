@@ -13,7 +13,14 @@
         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
     </bean>
 
-    <bean id="shiroRealm" class="org.szpinc.study.shiro.spring.realm.ShiroRealm"></bean>
+    <bean id="shiroRealm" class="org.szpinc.study.shiro.spring.realm.ShiroRealm">
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="MD5"/>
+                <property name="hashIterations" value="1024"/>
+            </bean>
+        </property>
+    </bean>
 
     <!-- 配置LifecycleBeanPostProcessor.可以自定义的来调用配置在Spring IOC容器中 Shiro Bean 的生命周期的方法 -->
     <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor" id="lifecycleBeanPostProcessor"></bean>
@@ -44,6 +51,8 @@
             <value>
                 /login.html = anon
                 /user/login = anon
+                /user/registry = anon
+                /registry.html = anon
                 /** = authc
             </value>
         </property>

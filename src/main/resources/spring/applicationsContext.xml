@@ -5,5 +5,7 @@
 
 
     <import resource="spring-shiro.xml"></import>
+    <import resource="spring-jdbc.xml"></import>
+    <import resource="spring-service.xml"></import>
 
 </beans>

@@ -22,17 +22,20 @@
     -->
     <logger name="org.szpinc.study.shiro.spring.controller" level="debug" additivity="false">
         <appender-ref ref="console"></appender-ref>
-    </logger><logger name="org.szpinc.study.shiro.spring.realm" level="debug" additivity="false">
+    </logger>
+    <logger name="org.szpinc.study.shiro.spring.realm" level="debug" additivity="false">
+        <appender-ref ref="console"></appender-ref>
+    </logger>
+    <logger name="org.szpinc.study.shiro.spring.test" level="debug" additivity="false">
         <appender-ref ref="console"></appender-ref>
     </logger>
 
 
-
     <!--<root level="debug">-->
-        <!--&lt;!&ndash; 定义了INFO及以上级别的日志，分别在文件和控制台输出 &ndash;&gt;-->
-        <!--<level value="debug" />-->
-        <!--&lt;!&ndash;<appender-ref ref="file" />&ndash;&gt;-->
-        <!--<appender-ref ref="console" />-->
+    <!--&lt;!&ndash; 定义了INFO及以上级别的日志，分别在文件和控制台输出 &ndash;&gt;-->
+    <!--<level value="debug" />-->
+    <!--&lt;!&ndash;<appender-ref ref="file" />&ndash;&gt;-->
+    <!--<appender-ref ref="console" />-->
     <!--</root>-->
 
 
