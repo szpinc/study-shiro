@@ -9,8 +9,13 @@
     <!-- 开启注解 -->
     <mvc:annotation-driven></mvc:annotation-driven>
 
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/page/"></property>
+        <property name="suffix" value=".html"></property>
+    </bean>
 
-
+    <mvc:default-servlet-handler/>
 
 
 </beans>

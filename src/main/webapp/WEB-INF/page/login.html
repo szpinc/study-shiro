@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!--<meta charset="UTF-8">-->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <title>用户登陆</title>
+</head>
+<body>
+<div class="login" style="text-align: center;" align="center">
+    <form class="login-form" id="login-form" action="/user/login" method="post">
+        <table>
+            <tbody>
+            <tr>
+                <th>
+                    <span>用户名</span>
+                </th>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <th>
+                    <span>密码</span>
+                </th>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" name="submit" value="登陆">
+                    <input type="reset" name="reset" value="重置">
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

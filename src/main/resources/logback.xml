@@ -22,6 +22,8 @@
     -->
     <logger name="org.szpinc.study.shiro.spring.controller" level="debug" additivity="false">
         <appender-ref ref="console"></appender-ref>
+    </logger><logger name="org.szpinc.study.shiro.spring.realm" level="debug" additivity="false">
+        <appender-ref ref="console"></appender-ref>
     </logger>
 
 
