@@ -2,9 +2,13 @@ package org.szpinc.study.shiro.spring.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.szpinc.study.shiro.spring.dao.UserDao;
 import org.szpinc.study.shiro.spring.entity.User;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -35,13 +39,25 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findUserById(String id) {
         sql = "SELECT * FROM `user` WHERE `id`=?";
-        User user = jdbcTemplate.queryForObject(sql, User.class, id);
+        User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
         return user;
     }
 
     @Override
     public User findUserByUsername(String username) {
         sql = "SELECT * FROM `user` WHERE username=?";
-        return jdbcTemplate.queryForObject(sql, User.class, username);
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
+    }
+
+    class UserRowMapper implements RowMapper<User> {
+
+        @Override
+        public User mapRow(ResultSet resultSet, int i) throws SQLException {
+            User user = new User();
+            user.setId(resultSet.getString("id"));
+            user.setUsername(resultSet.getString("username"));
+            user.setPassword(resultSet.getString("password"));
+            return user;
+        }
     }
 }
