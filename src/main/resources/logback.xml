@@ -29,6 +29,9 @@
     <logger name="org.szpinc.study.shiro.spring.test" level="debug" additivity="false">
         <appender-ref ref="console"></appender-ref>
     </logger>
+    <logger name="ch.qos.logback" level="error" additivity="false">
+        <appender-ref ref="console"></appender-ref>
+    </logger>
 
 
     <!--<root level="debug">-->

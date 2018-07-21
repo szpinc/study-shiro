@@ -1,6 +1,7 @@
 package org.szpinc.study.shiro.spring.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -39,20 +40,31 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findUserById(String id) {
         sql = "SELECT * FROM `user` WHERE `id`=?";
-        User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
-        return user;
+        try {
+            User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
+            return user;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public User findUserByUsername(String username) {
         sql = "SELECT * FROM `user` WHERE username=?";
-        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
+
+        try {
+            User user = jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
+            return user;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     class UserRowMapper implements RowMapper<User> {
 
         @Override
         public User mapRow(ResultSet resultSet, int i) throws SQLException {
+
             User user = new User();
             user.setId(resultSet.getString("id"));
             user.setUsername(resultSet.getString("username"));

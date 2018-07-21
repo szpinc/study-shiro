@@ -6,11 +6,21 @@
     <!-- 配置securityManager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="cacheManager" ref="ehCacheManager"></property>
-        <property name="realm" ref="shiroRealm"></property>
+        <!-- 配置认证器-->
+        <property name="authenticator" ref="authenticator"></property>
     </bean>
     <!-- 配置缓存管理器 -->
     <bean id="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
+    </bean>
+
+
+    <bean class="org.apache.shiro.authc.pam.ModularRealmAuthenticator" id="authenticator">
+        <property name="realms">
+            <list>
+                <ref bean="shiroRealm"></ref>
+            </list>
+        </property>
     </bean>
 
     <bean id="shiroRealm" class="org.szpinc.study.shiro.spring.realm.ShiroRealm">
@@ -27,7 +37,8 @@
 
 
     <!-- 启用IOC容器中使用shiro的注解，但必须在配置了LifecycleBeanPostProcessor之后调用 -->
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"></bean>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"></bean>
 
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <!--<property name="securityManager" value="securityManager"/>-->
@@ -57,8 +68,6 @@
             </value>
         </property>
     </bean>
-
-
 
 
 </beans>

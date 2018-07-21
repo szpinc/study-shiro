@@ -28,9 +28,18 @@ public class UserDaoTest {
 
         String id = "4021f7bad1203c6542f3df79d6604ed6";
 
+        User user = userDao.findUserByUsername(username);
+
+//        LOG.debug("user==[{}]",user);
+    }
+
+    @Test
+    public void testGetUserById () {
+        String id = "1234";
+
         User user = userDao.findUserById(id);
 
-        LOG.debug("user==[{}]",user);
+        LOG.debug("User = [{}]", user);
     }
 
 }
